@@ -10,7 +10,6 @@ int  main()
     int k;
     int tmp;
     vector<int> vPoint;
-    vector<int> vArr;
 
     // ввод количества фишек
     cin >> n;
@@ -44,41 +43,31 @@ int  main()
 
         first = vPoint.at(i);
 
-        vArr.clear();
-
-        for( j = 0; j < n; j++ )
-        {
-            if( j != i )
-            {
-                vArr.push_back( vPoint.at(j) );
-            }
-        }
-
-        l = 0;
-        r = vArr.size()-1;
+        l = i+1;
+        r = vPoint.size()-1;
 
         key = k - first;
 
-        cout << "begin " << l << " end " << r << " first " << first << " key " << key << endl;
+        // cout << "begin " << l << " end " << r << " first " << first << " key " << key << endl;
 
         while ((l <= r) && (flag != true)) 
         {
             mid = (l + r) / 2; // считываем срединный индекс отрезка [l,r]
  
-            if (vArr.at(mid) == key) flag = true; //проверяем ключ со серединным элементом
-            if (vArr.at(mid) > key) r = mid - 1; // проверяем, какую часть нужно отбросить
+            if (vPoint.at(mid) == key) flag = true; //проверяем ключ со серединным элементом
+            if (vPoint.at(mid) > key) r = mid - 1; // проверяем, какую часть нужно отбросить
             else l = mid + 1;
         }
 
         if( flag )
         {
-            cout << "index of " << key << " is " << mid << endl;
+            // cout << "index of " << key << " is " << mid << endl;
             second = key;
             break;
         }
         else 
         {
-            cout << "not find" << endl;
+            // cout << "not find" << endl;
         }
     }
 
