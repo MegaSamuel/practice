@@ -3,6 +3,26 @@
 
 using namespace std;
 
+// функция с алгоритмом двоичного поиска 
+int Search_Binary (int arr[], int left, int right, int key)
+{
+ int midd = 0;
+ while (1)
+ {
+ midd = (left + right) / 2;
+ 
+ if (key < arr[midd])       // если искомое меньше значения в ячейке
+ right = midd - 1;      // смещаем правую границу поиска
+ else if (key > arr[midd])  // если искомое больше значения в ячейке
+ left = midd + 1;    // смещаем левую границу поиска
+ else                       // иначе (значения равны)
+ return midd;           // функция возвращает индекс ячейки
+ 
+ if (left > right)          // если границы сомкнулись 
+ return -1;
+ }
+}
+
 int  main()
 {
     int i, j;
@@ -59,7 +79,7 @@ int  main()
 
         key = k - first;
 
-        // cout << "begin " << l << " end " << r << " first " << first << " key " << key << endl;
+        cout << "begin " << l << " end " << r << " first " << first << " key " << key << endl;
 
         while ((l <= r) && (flag != true)) 
         {
@@ -72,13 +92,13 @@ int  main()
 
         if( flag )
         {
-            // cout << "index of " << key << " is " << mid << endl;
+            cout << "index of " << key << " is " << mid << endl;
             second = key;
             break;
         }
         else 
         {
-            // cout << "not find" << endl;
+            cout << "not find" << endl;
         }
     }
 
