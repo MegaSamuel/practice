@@ -9,24 +9,13 @@ public:
     {
         string res;
         vector<string> str_digits;
-        vector<int> digits;
         int digit;
-
-// Symbol       Value
-// I             1
-// V             5
-// X             10
-// L             50
-// C             100
-// D             500
-// M             1000
 
         int count = 0;
 
         while( num > 0 )
         {
             digit = num%10;
-            digits.push_back( digit );
             num /= 10;
 
             switch( digit )
@@ -114,27 +103,10 @@ public:
             count++;
         }
 
-        for( int it : digits )
-        {
-            cout << it << ' ';
-        }
-
-        cout << endl;
-
-        for( string it : str_digits )
-        {
-            cout << it << ' ';
-        }
-
-        cout << endl;
-
         for( int i = str_digits.size(); i > 0; i-- )
         {
-//            cout << str_digits[i-1] << ' ';
             res += str_digits[i-1];
         }
-
-        cout << res << endl;
 
         return res;
     }
