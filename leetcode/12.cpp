@@ -35,7 +35,7 @@ int main()
 
     for( int i = 0; i < input.size(); i++ )
     {
-        if( 0 == strcmp( output[i], sol.intToRoman( input[i] ) )
+        if( 0 == output[i].compare( sol.intToRoman( input[i] ) ) )
             cout << i+1 << " - OK" << endl;
         else
             cout << i+1 << " - FAIL" << endl;
