@@ -1,55 +1,73 @@
 #include <iostream>
 #include <string>
-// #include <vector>
 
 using namespace std;
 
 class Solution {
 public:
     bool isValid(string s) {
-        bool result = false;
-        int open_p1 = 0, close_p1 = 0;
-        int open_p2 = 0, close_p2 = 0;
-        int open_p3 = 0, close_p3 = 0;
-        // vector<char> vct;
+        bool result = true;
 
-        // vct.push_back('(');
-        // vct.push_back(')');
-        // vct.push_back('{');
-        // vct.push_back('}');
-        // vct.push_back('[');
-        // vct.push_back(']');
+        // пустая строка
+        if( 0 == s.size() )
+            return false;
 
-        // solution
+        if( ( ')' == s.at(0) ) || ( '}' == s.at(0) ) || ( ']' == s.at(0) ) )
+            return false;
+
         for( int i = 0; i < s.size(); i++ )
         {
-            switch( s.at(i) )
+            if( '(' == s.at(i) )
             {
-                case '(':
-                    open_p1 += 1;
+                // строка консилась
+                if( i+1 == s.size() )
+                {
+                    result = false;
                     break;
-                case ')':
-                    close_p1 += 1;
+                }
+
+                // после открытой скоби идет закрытая другого типа
+                if( ( '}' == s.at(i+1) ) || ( ( ']' == s.at(i+1) ) ) )
+                {
+                    result = false;
                     break;
-                case '{':
-                    open_p2 += 1;
+                }
+            }
+
+            if( '{' == s.at(i) )
+            {
+                // строка консилась
+                if( i+1 == s.size() )
+                {
+                    result = false;
                     break;
-                case '}':
-                    close_p2 += 1;
+                }
+
+                // после открытой скоби идет закрытая другого типа
+                if( ( ')' == s.at(i+1) ) || ( ( ']' == s.at(i+1) ) ) )
+                {
+                    result = false;
                     break;
-                case '[':
-                    open_p3 += 1;
+                }
+            }
+
+            if( '[' == s.at(i) )
+            {
+                // строка консилась
+                if( i+1 == s.size() )
+                {
+                    result = false;
                     break;
-                case ']':
-                    close_p3 += 1;
+                }
+
+                // после открытой скоби идет закрытая другого типа
+                if( ( '}' == s.at(i+1) ) || ( ( ')' == s.at(i+1) ) ) )
+                {
+                    result = false;
                     break;
-                default:
-                    break;
+                }
             }
         }
-
-        if( ( open_p1 == close_p1 ) && ( open_p2 == close_p2 ) && ( open_p3 == close_p3 ) )
-            result = true;
 
         return result;
     }
