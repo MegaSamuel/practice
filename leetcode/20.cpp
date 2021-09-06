@@ -25,78 +25,60 @@ public:
             if( '(' == s.at(i) )
             {
                 open_p1 += 1;
-
-                // строка консилась
-                if( i+1 == s.size() )
-                {
-                    result = false;
-                    break;
-                }
-
-                // после открытой скоби идет закрытая другого типа
-                if( ( '}' == s.at(i+1) ) || ( ( ']' == s.at(i+1) ) ) )
-                {
-                    result = false;
-                    break;
-                }
             }
 
             if( '{' == s.at(i) )
             {
                 open_p2 += 1;
-
-                // строка консилась
-                if( i+1 == s.size() )
-                {
-                    result = false;
-                    break;
-                }
-
-                // после открытой скоби идет закрытая другого типа
-                if( ( ')' == s.at(i+1) ) || ( ( ']' == s.at(i+1) ) ) )
-                {
-                    result = false;
-                    break;
-                }
             }
 
             if( '[' == s.at(i) )
             {
                 open_p3 += 1;
-
-                // строка консилась
-                if( i+1 == s.size() )
-                {
-                    result = false;
-                    break;
-                }
-
-                // после открытой скоби идет закрытая другого типа
-                if( ( '}' == s.at(i+1) ) || ( ( ')' == s.at(i+1) ) ) )
-                {
-                    result = false;
-                    break;
-                }
             }
 
             if( ')' == s.at(i) )
             {
+                //if( ( open_p1 ) && ( open_p2 || open_p3 ) )
+                if( open_p2 || open_p3 )
+                {
+                    result = false;
+                    break;
+                }
+
                 open_p1 -= 1;
             }
 
             if( '}' == s.at(i) )
             {
+                //if( ( open_p2 ) && ( open_p1 || open_p3 ) )
+                if( open_p1 || open_p3 )
+                {
+                    result = false;
+                    break;
+                }
+
                 open_p2 -= 1;
             }
 
             if( ']' == s.at(i) )
             {
+                //if( ( open_p3 ) && ( open_p2 || open_p1 ) )
+                if( open_p2 || open_p1 )
+                {
+                    result = false;
+                    break;
+                }
+
                 open_p3 -= 1;
             }
-        }
 
-        if( ( 0 != open_p1 ) || ( 0 != open_p2 ) || ( 0 != open_p3 )  )
-            result = false;
+            if( ( 0 > open_p1 ) || ( 0 > open_p2 ) || ( 0 > open_p3 )  )
+            {
+                result = false;
+                break;
+            }
+        }
 
         return result;
     }
