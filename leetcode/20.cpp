@@ -13,10 +13,11 @@ public:
         size_t pos2 = 0;
         size_t pos3 = 0;
 
+        if( s.size() % 2 )
+            return false;
+
         while( ( pos1 != string::npos ) || ( pos2 != string::npos ) || ( pos3 != string::npos ) )
         {
-//            cout << "mark 1 " << s << endl;
-
             pos1 = s.find( "()" );
             if( pos1 != string::npos )
                 s.erase( pos1, 2 );
@@ -28,8 +29,6 @@ public:
             pos3 = s.find( "[]" );
             if( pos3 != string::npos )
                 s.erase( pos3, 2 );
-
-//            cout << "mark 2 " << s << endl;
         }
 
         if( 0 != s.size() )
