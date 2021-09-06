@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -15,10 +16,16 @@ public:
         if( ( ')' == s.at(0) ) || ( '}' == s.at(0) ) || ( ']' == s.at(0) ) )
             return false;
 
+        int open_p1 = 0;
+        int open_p2 = 0;
+        int open_p3 = 0;
+
         for( int i = 0; i < s.size(); i++ )
         {
             if( '(' == s.at(i) )
             {
+                open_p1 += 1;
+
                 // строка консилась
                 if( i+1 == s.size() )
                 {
@@ -36,6 +43,8 @@ public:
 
             if( '{' == s.at(i) )
             {
+                open_p2 += 1;
+
                 // строка консилась
                 if( i+1 == s.size() )
                 {
@@ -53,6 +62,8 @@ public:
 
             if( '[' == s.at(i) )
             {
+                open_p3 += 1;
+
                 // строка консилась
                 if( i+1 == s.size() )
                 {
@@ -67,7 +78,25 @@ public:
                     break;
                 }
             }
+
+            if( ')' == s.at(i) )
+            {
+                open_p1 -= 1;
+            }
+
+            if( '}' == s.at(i) )
+            {
+                open_p2 -= 1;
+            }
+
+            if( ']' == s.at(i) )
+            {
+                open_p3 -= 1;
+            }
         }
+
+        if( ( 0 != open_p1 ) || ( 0 != open_p2 ) || ( 0 != open_p3 )  )
+            result = false;
 
         return result;
     }
@@ -77,17 +106,32 @@ int main()
 {
     Solution sol;
 
-    string str1 = "()";
-    string str2 = "()[]{}";
-    string str3 = "(]";
-    string str4 = "([)]";
-    string str5 = "{[]}";
+    vector<string> input;
+    vector<bool> output;
 
-    cout << sol.isValid(str1) << endl;
-    cout << sol.isValid(str2) << endl;
-    cout << sol.isValid(str3) << endl;
-    cout << sol.isValid(str4) << endl;
-    cout << sol.isValid(str5) << endl;
+    input.push_back( "()" );
+    input.push_back( "()[]{}" );
+    input.push_back( "(]" );
+    input.push_back( "([)]" );
+    input.push_back( "{[]}" );
+    input.push_back( "({{{{}}}))" );
+    input.push_back( "[([]])" );
+
+    output.push_back(true);
+    output.push_back(true);
+    output.push_back(false);
+    output.push_back(false);
+    output.push_back(true);
+    output.push_back(false);
+    output.push_back(false);
+
+    for( int i = 0; i < input.size(); i++ )
+    {
+        if( output[i] == sol.isValid( input[i] ) )
+            cout << i+1 << " - OK" << endl;
+        else
+            cout << i+1 << " - FAIL" << endl;
+    }
 
     return 0;
 }
