@@ -9,21 +9,27 @@ class Solution {
 public:
     bool isValid(string s) {
         bool result = true;
-        size_t pos = 0;
+        size_t pos1 = 0;
+        size_t pos2 = 0;
+        size_t pos3 = 0;
 
-        while( pos != string::npos )
+        while( ( pos1 != string::npos ) || ( pos2 != string::npos ) || ( pos3 != string::npos ) )
         {
-            pos = s.find( "()" );
-            if( pos != string::npos )
-                s.erase( pos, 2 );
+//            cout << "mark 1 " << s << endl;
 
-            pos = s.find( "{}" );
-            if( pos != string::npos )
-                s.erase( pos, 2 );
+            pos1 = s.find( "()" );
+            if( pos1 != string::npos )
+                s.erase( pos1, 2 );
 
-            pos = s.find( "[]" );
-            if( pos != string::npos )
-                s.erase( pos, 2 );
+            pos2 = s.find( "{}" );
+            if( pos2 != string::npos )
+                s.erase( pos2, 2 );
+
+            pos3 = s.find( "[]" );
+            if( pos3 != string::npos )
+                s.erase( pos3, 2 );
+
+//            cout << "mark 2 " << s << endl;
         }
 
         if( 0 != s.size() )
