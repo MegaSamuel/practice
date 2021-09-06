@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+// #include <vector>
 
 using namespace std;
 
@@ -10,8 +11,42 @@ public:
         int open_p1 = 0, close_p1 = 0;
         int open_p2 = 0, close_p2 = 0;
         int open_p3 = 0, close_p3 = 0;
+        // vector<char> vct;
+
+        // vct.push_back('(');
+        // vct.push_back(')');
+        // vct.push_back('{');
+        // vct.push_back('}');
+        // vct.push_back('[');
+        // vct.push_back(']');
 
         // solution
+        for( int i = 0; i < s.size(); i++ )
+        {
+            switch( s.at(i) )
+            {
+                case '(':
+                    open_p1 += 1;
+                    break;
+                case ')':
+                    close_p1 += 1;
+                    break;
+                case '{':
+                    open_p2 += 1;
+                    break;
+                case '}':
+                    close_p2 += 1;
+                    break;
+                case '[':
+                    open_p3 += 1;
+                    break;
+                case ']':
+                    close_p3 += 1;
+                    break;
+                default:
+                    break;
+            }
+        }
 
         if( ( open_p1 == close_p1 ) && ( open_p2 == close_p2 ) && ( open_p3 == close_p3 ) )
             result = true;
