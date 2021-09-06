@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -8,77 +9,25 @@ class Solution {
 public:
     bool isValid(string s) {
         bool result = true;
+        size_t pos = 0;
 
-        // пустая строка
-        if( 0 == s.size() )
-            return false;
-
-        if( ( ')' == s.at(0) ) || ( '}' == s.at(0) ) || ( ']' == s.at(0) ) )
-            return false;
-
-        int open_p1 = 0;
-        int open_p2 = 0;
-        int open_p3 = 0;
-
-        for( int i = 0; i < s.size(); i++ )
+        while( pos != string::npos )
         {
-            if( '(' == s.at(i) )
-            {
-                open_p1 += 1;
-            }
+            pos = s.find( "()" );
+            if( pos != string::npos )
+                s.erase( pos, 2 );
 
-            if( '{' == s.at(i) )
-            {
-                open_p2 += 1;
-            }
+            pos = s.find( "{}" );
+            if( pos != string::npos )
+                s.erase( pos, 2 );
 
-            if( '[' == s.at(i) )
-            {
-                open_p3 += 1;
-            }
-
-            if( ')' == s.at(i) )
-            {
-                //if( ( open_p1 ) && ( open_p2 || open_p3 ) )
-                if( open_p2 || open_p3 )
-                {
-                    result = false;
-                    break;
-                }
-
-                open_p1 -= 1;
-            }
-
-            if( '}' == s.at(i) )
-            {
-                //if( ( open_p2 ) && ( open_p1 || open_p3 ) )
-                if( open_p1 || open_p3 )
-                {
-                    result = false;
-                    break;
-                }
-
-                open_p2 -= 1;
-            }
-
-            if( ']' == s.at(i) )
-            {
-                //if( ( open_p3 ) && ( open_p2 || open_p1 ) )
-                if( open_p2 || open_p1 )
-                {
-                    result = false;
-                    break;
-                }
-
-                open_p3 -= 1;
-            }
-
-            if( ( 0 > open_p1 ) || ( 0 > open_p2 ) || ( 0 > open_p3 )  )
-            {
-                result = false;
-                break;
-            }
+            pos = s.find( "[]" );
+            if( pos != string::npos )
+                s.erase( pos, 2 );
         }
+
+        if( 0 != s.size() )
+            result = false;
 
         return result;
     }
@@ -98,6 +47,7 @@ int main()
     input.push_back( "{[]}" );
     input.push_back( "({{{{}}}))" );
     input.push_back( "[([]])" );
+    input.push_back( "(([]){})" );
 
     output.push_back(true);
     output.push_back(true);
@@ -106,6 +56,7 @@ int main()
     output.push_back(true);
     output.push_back(false);
     output.push_back(false);
+    output.push_back(true);
 
     for( int i = 0; i < input.size(); i++ )
     {
