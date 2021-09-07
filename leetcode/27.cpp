@@ -23,11 +23,6 @@ public:
             }
         }
 
-        for( i = 0; i < nums.size(); i++ )
-        {
-
-        }
-
         return nums.size();
     }
 };
@@ -38,15 +33,21 @@ int main()
     vector<int> vct;
     Solution sol;
 
-    val = 2;
-    vct.push_back(0);
-    vct.push_back(1);
+    // val = 2;
+    // vct.push_back(0);
+    // vct.push_back(1);
+    // vct.push_back(2);
+    // vct.push_back(2);
+    // vct.push_back(3);
+    // vct.push_back(0);
+    // vct.push_back(4);
+    // vct.push_back(2);
+
+    val = 3;
+    vct.push_back(3);
     vct.push_back(2);
     vct.push_back(2);
     vct.push_back(3);
-    vct.push_back(0);
-    vct.push_back(4);
-    vct.push_back(2);
 
     cout << sol.removeElement( vct, val ) << endl;
 
