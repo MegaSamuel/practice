@@ -6,7 +6,29 @@ using namespace std;
 class Solution {
 public:
     int removeElement(vector<int>& nums, int val) {
-        return 0;
+        int i = 0;
+
+        // проход по вектору
+        while( i < nums.size() )
+        {
+            if( val == nums[i] )
+            {
+                // удаляем элемент, оставшиеся элементы смещаются на одну позицию
+                nums.erase( nums.begin()+i );
+            }
+            else
+            {
+                // если не было удаления, то следующий индекс
+                i++;
+            }
+        }
+
+        for( i = 0; i < nums.size(); i++ )
+        {
+
+        }
+
+        return nums.size();
     }
 };
 
