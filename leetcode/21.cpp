@@ -24,10 +24,78 @@ public:
         cout << endl;
     }
 
-    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
-        ListNode *result;
+    void insertAtTheEnd( ListNode** head, int value )
+    {
+        ListNode *node = new ListNode( value );
 
-        result = new ListNode();
+        if( *head == nullptr )
+        {
+            *head = node;
+            return;
+        }
+
+        ListNode *last = *head;
+        while( last->next != nullptr )
+        {
+            last = last->next;
+        }
+
+        last->next = node;
+    }
+
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        ListNode *result = nullptr;
+        ListNode *tmp1;
+        ListNode *tmp2;
+
+        // оба списка пустые
+        if( ( nullptr == l1 ) && ( nullptr == l2 ) )
+        {
+            return new ListNode();
+        }
+
+        // пустой только первый
+        if( ( nullptr == l1 ) && ( nullptr != l2 ) )
+        {
+            return l2;
+        }
+
+        // пустой только второй
+        if( ( nullptr != l1 ) && ( nullptr == l2 ) )
+        {
+            return l1;
+        }
+
+        // начинаем с голов
+        tmp1 = l1;
+        tmp2 = l2;
+
+        // проход по первому списку
+        while( tmp1 != nullptr )
+        {
+            // проход по второму списку
+            while( tmp2 != nullptr )
+            {
+                if( tmp1->val >= tmp2->val )
+                {
+                    // узел результата
+                    insertAtTheEnd( &result, tmp2->val );
+
+                    // следующий узел списка 2
+                    tmp2 = tmp2->next;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            // узел результата
+            insertAtTheEnd( &result, tmp1->val );
+
+            // следующий узел списка 1
+            tmp1 = tmp1->next;
+        }
 
         return result;
     }
