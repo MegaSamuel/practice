@@ -51,7 +51,7 @@ public:
         // оба списка пустые
         if( ( nullptr == l1 ) && ( nullptr == l2 ) )
         {
-            return new ListNode();
+            return nullptr;
         }
 
         // пустой только первый
@@ -95,6 +95,18 @@ public:
 
             // следующий узел списка 1
             tmp1 = tmp1->next;
+
+            if( ( nullptr == tmp1 ) && ( nullptr != tmp2 ) )
+            {
+                while( tmp2 != nullptr )
+                {
+                    // узел результата
+                    insertAtTheEnd( &result, tmp2->val );
+
+                    // следующий узел списка 2
+                    tmp2 = tmp2->next;
+                }
+            }
         }
 
         return result;
@@ -115,7 +127,7 @@ int main()
     list_1->next->next = new ListNode(4);
 
     // формируем второй список
-    list_2 = new ListNode(1);
+    list_2 = new ListNode(2);
     list_2->next = new ListNode(3);
     list_2->next->next = new ListNode(4);
 
