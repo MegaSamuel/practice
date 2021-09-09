@@ -1,18 +1,29 @@
 #include <iostream>
-#include <algorithm>
 #include <string>
 
 using namespace std;
 
 void IsPalindrome(string s) {
     // нужно понять, будет ли s палиндромом
-    string tmp;
+    bool result = true;
+    int l, r;
     
-    tmp = s;
-    
-    reverse( tmp.begin(), tmp.end() );
-   
-    cout << ( tmp == s ) << endl;
+    l = 0;
+    r = s.size()-1;
+
+    while( l < r )
+    {
+        if( s[l] != s[r] )
+        {
+            result = false;
+            break;
+        }
+
+        l++;
+        r--;
+    }
+
+    cout << result << endl;
 }
 
 int main() {
