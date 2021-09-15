@@ -4,33 +4,28 @@
 
 using namespace std;
 
-int main() 
+map<char, int> BuildCharCounters( const string& word )
 {
+    map<char, int> mapWord;
+    
+    for( const char ch : word ) 
+    {
+        ++mapWord[ch];
+    }
+    
+    return mapWord;
+}
+
+int main() {
     int n;
     cin >> n;
 
-    for( int i = 0; i < n; ++i ) 
-    {
+    for (int i = 0; i < n; ++i) {
         string first_word, second_word;
         cin >> first_word >> second_word;
-
-        map<char, int> mapFirstWord;
-        map<char, int> mapSecondWord;
-
-        for( const char ch : first_word )
-        {
-            ++mapFirstWord[ch];
-        }
-        for( const char ch : second_word )
-        {
-            ++mapSecondWord[ch];
-        }
-
-        if( mapFirstWord == mapSecondWord ) 
-        {
+        if (BuildCharCounters(first_word) == BuildCharCounters(second_word) ) {
             cout << "YES"s << endl;
-        } else 
-        {
+        } else {
             cout << "NO"s << endl;
         }
     }
