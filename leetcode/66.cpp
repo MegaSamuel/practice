@@ -7,12 +7,54 @@ class Solution {
 public:
     vector<int> plusOne(vector<int>& digits) {
         vector<int> vct;
+        bool over = false;
 
-        for( const int& it : vct )
+        // заполняем вектор в обратном порядке
+        for( int i = digits.size()-1; i >= 0; i-- )
         {
-            cout << it << " ";
+            vct.push_back( digits[i] );
         }
-        cout << endl;
+
+        // проход по вектору
+        for( int i = 0; i < vct.size(); i++ )
+        {
+            vct[i] += 1;
+            over = false;
+            
+            if( vct[i] < 10 )
+            {
+                // все хорошо - выходим
+                break;
+            }
+            else
+            {
+                // если переполнение
+                vct[i] %= 10;
+                over = true;
+            }
+        }
+
+        if( over )
+        {
+            vct.push_back( 1 );
+        }
+
+        // разворачиваем вектор
+        int l, r;
+        l = 0;
+        r = vct.size()-1;
+        while( l < r )
+        {
+            swap( vct[l], vct[r] );
+            l++;
+            r--;
+        }
+
+        // for( const int& it : vct )
+        // {
+        //     cout << it << " ";
+        // }
+        // cout << endl;
 
         return vct;
     }
