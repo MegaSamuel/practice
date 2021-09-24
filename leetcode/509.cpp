@@ -6,7 +6,23 @@ using namespace std;
 class Solution {
 public:
     int fib(int n) {
-        return 0;
+        if( 0 == n )
+            return 0;
+
+        if( 1 == n )
+            return 1;
+        
+        int prev = 0;
+        int next = 1;
+
+        for( int i = 0; i < n; i++ )
+        {
+            int temp = next;
+            next = prev + next;
+            prev = temp;
+        }
+
+        return prev;
     }
 };
 
