@@ -21,8 +21,8 @@ public:
 
 int main()
 {
-    vector<int>  input  = {0,1,2,4,25};
-    vector<int>  output = {0,1,1,4,1389537};
+    vector<int>  input  = {0,1,2,4,25,37};
+    vector<int>  output = {0,1,1,4,1389537,2082876103};
     Solution sol;
 
     for( int i = 0; i < static_cast<int>(input.size()); i++ )
