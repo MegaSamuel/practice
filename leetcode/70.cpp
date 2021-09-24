@@ -5,38 +5,15 @@ using namespace std;
 
 class Solution {
 public:
-    unsigned long long fibonacci(int number)
-    {
-        if (number == 0)
-            return 0; // базовый случай (условие завершения)
-        if (number == 1)
-            return 1; // базовый случай (условие завершения)
-        return fibonacci(number-1) + fibonacci(number-2);
-    }
-
-    unsigned long long fibonacci_fast(int number, int p = 0, int c = 1)
-    {
-	    return number == 0 ? p : fibonacci_fast(number - 1, c, c + p);
-    }
-
-    // int climbStairs(int n) {
-    //     int ways = 0;
-
-    //     //ways = fibonacci(n+1);
-    //     ways = fibonacci_fast(n+1);
-
-    //     return ways;
-    // }
-
-    int climbStairs(int n) {
+    int climbStairs(int number) {
         int ways=0,n1=1,n2=2;
     
-        if(n==n1)
+        if(number==n1)
             return 1;
-        if(n==n2)
+        if(number==n2)
             return 2;
 
-        for(int i=2; i < n; i++){
+        for(int i=2; i < number; i++){
             ways=n1+n2;
             n1=n2;
             n2=ways;
