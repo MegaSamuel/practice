@@ -5,6 +5,7 @@ using namespace std;
 
 class Solution {
 public:
+#if 0
     int tribonacci(int n) {
         if( 0 == n )
             return 0;
@@ -17,6 +18,33 @@ public:
 
         return tribonacci(n-3) + tribonacci(n-2) + tribonacci(n-1);
     }
+#else
+    int tribonacci(int n) {
+        if( 0 == n )
+            return 0;
+
+        if( 1 == n )
+            return 1;
+
+        if( 2 == n )
+            return 1;
+
+        int val  = 0;
+        int val3 = 0;
+        int val2 = 1;
+        int val1 = 1;
+
+        for( int i = 0; i < n; i++ )
+        {
+            val = val3 + val2 + val1;
+            val3 = 
+            val2 = 
+            val1 = 
+        }
+
+        return prev;
+    }
+#endif
 };
 
 int main()
