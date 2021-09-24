@@ -19,12 +19,29 @@ public:
 	    return number == 0 ? p : fibonacci_fast(number - 1, c, c + p);
     }
 
+    // int climbStairs(int n) {
+    //     int ways = 0;
+
+    //     //ways = fibonacci(n+1);
+    //     ways = fibonacci_fast(n+1);
+
+    //     return ways;
+    // }
+
     int climbStairs(int n) {
-        int ways = 0;
+        int ways=0,n1=1,n2=2;
+    
+        if(n==n1)
+            return 1;
+        if(n==n2)
+            return 2;
 
-        //ways = fibonacci(n+1);
-        ways = fibonacci_fast(n+1);
-
+        for(int i=2; i < n; i++){
+            ways=n1+n2;
+            n1=n2;
+            n2=ways;
+        }
+    
         return ways;
     }
 };
