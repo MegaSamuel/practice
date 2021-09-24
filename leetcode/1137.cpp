@@ -29,14 +29,14 @@ public:
         if( 2 == n )
             return 1;
 
-        int val3 = 0;
-        int val2 = 1;
-        int val1 = 1;
+        unsigned val3 = 0;
+        unsigned val2 = 1;
+        unsigned val1 = 1;
 
         for( int i = 0; i < n; i++ )
         {
-            int val1_prev = val1;
-            int val2_prev = val2;
+            unsigned val1_prev = val1;
+            unsigned val2_prev = val2;
             val1 = val3 + val2 + val1;
             val2 = val1_prev;
             val3 = val2_prev;
