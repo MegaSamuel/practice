@@ -5,7 +5,7 @@ using namespace std;
 
 class Solution {
 public:
-    int fibonacci(int number)
+    unsigned long long fibonacci(int number)
     {
         if (number == 0)
             return 0; // базовый случай (условие завершения)
@@ -14,10 +14,16 @@ public:
         return fibonacci(number-1) + fibonacci(number-2);
     }
 
+    unsigned long long fibonacci_fast(int number, int p = 0, int c = 1)
+    {
+	    return number == 0 ? p : fibonacci_fast(number - 1, c, c + p);
+    }
+
     int climbStairs(int n) {
         int ways = 0;
 
-        ways = fibonacci(n+1);
+        //ways = fibonacci(n+1);
+        ways = fibonacci_fast(n+1);
 
         return ways;
     }
