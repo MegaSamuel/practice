@@ -6,7 +6,16 @@ using namespace std;
 class Solution {
 public:
     int tribonacci(int n) {
-        return 0;
+        if( 0 == n )
+            return 0;
+
+        if( 1 == n )
+            return 1;
+
+        if( 2 == n )
+            return 1;
+
+        return tribonacci(n-3) + tribonacci(n-2) + tribonacci(n-1);
     }
 };
 
