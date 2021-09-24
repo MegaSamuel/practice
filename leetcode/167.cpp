@@ -8,13 +8,27 @@ public:
     vector<int> twoSum(vector<int>& numbers, int target) {
         vector<int>  out;
 
-        // for( int i = 0; i < numbers.size()/2; i++ )
-        // {
-        //     if( target < numbers[i] + numbers[numbers.size()-1-i] )
-        //     {
+        int l = 0;
+        int r = numbers.size()-1;
 
-        //     }
-        // }
+        while( l < r )
+        {
+            if( target < numbers[l] + numbers[r] )
+            {
+                r--;
+            }
+            else if( target > numbers[l] + numbers[r] )
+            {
+                l++;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        out.push_back(++l);
+        out.push_back(++r);
 
         return out;        
     }
@@ -23,8 +37,8 @@ public:
 int main()
 {
     Solution sol;
-    int target = 9;
-    vector<int> numbers = {2,7,11,15};
+    int target = -1;
+    vector<int> numbers = {-1,0};
 
     for( auto it : sol.twoSum( numbers, target ) )
     {
