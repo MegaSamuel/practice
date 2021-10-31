@@ -9,7 +9,7 @@ public:
     int findLength(vector<int>& nums1, vector<int>& nums2) {
         int maxLength = 0;
         // матрица расстояний, размерность +1 по каждому вектору
-        vector<vector<char>> vct(nums1.size()+1, vector<char>(nums2.size()+1));
+        vector<vector<int>> vct(nums1.size()+1, vector<int>(nums2.size()+1));
 
         // проходим с концов векторов и заполняем матрицу
         for(int i = nums1.size()-1; i >= 0; i--)
