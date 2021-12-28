@@ -6,14 +6,27 @@ class Solution {
 public:
     int findComplement(int num) {
         int res = 0;
+        int mask = 0;
+        int count = 0;
 
+        // invert all bits
+        res = ~num;
+
+        // while num is greater than zero
         while(0 != num)
         {
-            cout << num << " "s << !(num & 0x1) << endl;
+            // set 1 to mask in count position
+            mask |= (1 << count);
 
-            res = (res << 1) + !(num & 0x1);
-            num = num >> 1;
+            // shift num to right
+            num >>= 1;
+
+            // increase counter
+            count++;
         }
+
+        // take result by mask
+        res &= mask;
 
         return res;
     }
