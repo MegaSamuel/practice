@@ -14,7 +14,38 @@ using namespace std;
 class Solution {
 public:
     ListNode* middleNode(ListNode* head) {
-        return head;
+        ListNode *current = head;
+        int index;
+        int node_count = 0;
+
+        // count nodes
+        while(nullptr != current)
+        {
+            node_count++;
+            current = current->next;
+        }
+
+        // find index of middle
+        index = node_count / 2 + 1;
+
+        //cout << "node count "s << node_count << " ind "s << index << endl;
+
+        current = head;
+        node_count = 0;
+
+        // count nodes again
+        while(nullptr != current)
+        {
+            node_count++;
+            if(index == node_count)
+            {
+                // if we are at the middle
+                break;
+            }
+            current = current->next;
+        }
+
+        return current;
     }
 };
 
@@ -31,7 +62,7 @@ int main()
 #else
     //in  [1,2,3,4,5,6]
     //out [4,5,6]
-    ListNode node5(6, nullptr);
+    ListNode node6(6, nullptr);
     ListNode node5(5, &node6);
     ListNode node4(4, &node5);
     ListNode node3(3, &node4);
