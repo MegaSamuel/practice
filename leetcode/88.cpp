@@ -17,29 +17,47 @@ public:
 
     void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
 
-        int i, j, k = 0;
+        int i, j, k;
 
-        for( i = 0; i < m+n; i++ )
+        vector<int> tmp(m);
+
+        for(i = 0; i < m; i++)
         {
-            cout << "i " << i << endl;
-            for( j = k; j < n; j++ )
+            tmp[i] = nums1[i];
+        }
+
+        i = 0;
+        j = 0;
+        k = 0;
+
+        while((i < m) && (j < n))
+        {
+            if(tmp[i] <= nums2[j])
             {
-                cout << " j " << j << endl;
-                if( nums1[i] > nums2[j] )
-                {
-                    for( int l=m+n-1; l > i; l-- )
-                    {
-                        cout << "  l " << l << endl;
-                        nums1[l] = nums1[l-1];
-                    }
-                    nums1[i] = nums2[j];
-                    k++;
-                }
-                else
-                {
-                    break;
-                }
+                nums1[k] = tmp[i];
+                k++;
+                i++;
             }
+            else
+            {
+                nums1[k] = nums2[j];
+                k++;
+                j++;
+            }
+        }
+
+        while(i < m)
+        {
+            nums1[k] = tmp[i];
+            k++;
+            i++;
+        }
+
+        while(j < n)
+        {
+            nums1[k] = nums2[j];
+            k++;
+            j++;
         }
     }
 };
