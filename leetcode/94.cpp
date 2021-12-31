@@ -19,6 +19,27 @@ public:
     vector<int> inorderTraversal(TreeNode* root) {
         vector<int> res;
 
+        TreeNode *current = root;
+        stack<TreeNode*> stackNode;
+
+        while((nullptr != current) || !stackNode.empty())
+        {
+            while(nullptr != current)
+            {
+                stackNode.push(current);
+
+                current = current->left;
+            }
+
+            current = stackNode.top();
+
+            res.push_back(current->val);
+
+            stackNode.pop();
+
+            current = current->right;
+        }
+
         return res;
     }
 };
