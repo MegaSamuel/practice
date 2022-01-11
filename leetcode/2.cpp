@@ -16,56 +16,46 @@ struct ListNode {
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        ListNode* curr;
-        int order;
-        int num1 = 0;
-        int num2 = 0;
-        
-        curr = l1;
-        order = 0;
-        while(nullptr != curr)
+        ListNode *p = l1;
+        ListNode *q = l2;
+
+        int carry = 0;
+
+        ListNode *current = new ListNode(0);
+        ListNode *ret = current;
+
+        while((nullptr != p) || (nullptr != q))
         {
-            num1 += curr->val*pow(10,order);
-            order++;
-            curr = curr->next;
-        }
-
-        curr = l2;
-        order = 0;
-        while(nullptr != curr)
-        {
-            num2 += curr->val*pow(10,order);
-            order++;
-            curr = curr->next;
-        }
-
-        int num = num1 + num2;
-
-        ListNode *head = nullptr;
-        ListNode *prev = nullptr;
-        while(num > 0)
-        {
-            ListNode curr(num%10);
-
-            cout << "val " << curr.val << endl;
-
-            if(nullptr == head)
+            int sum = 0;
+            if(nullptr != p)
             {
-                head = &curr;
-            }
-            else
-            {
-                prev->next = &curr;
+                sum += p->val;
+                p = p->next;
             }
 
-            prev = &curr;
+            if(nullptr != q)
+            {
+                sum += q->val;
+                q = q->next;
+            }
 
-            num /= 10;
+            sum += carry;
+
+            carry = sum/10;
+
+            current->next = new ListNode(sum%10);
+
+            current = current->next;
         }
 
-        cout << num1 << " "s << num2 << endl;
+        // last element
+        if(carry)
+        {
+            current->next = new ListNode(carry);
+        }
 
-        return head;
+        // first node is zero, take second node
+        return ret->next;
     }
 };
 
