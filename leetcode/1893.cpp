@@ -1,25 +1,24 @@
 #include <iostream>
 #include <vector>
 #include <cassert>
+#include <algorithm>
 
 using namespace std;
 
 class Solution {
 public:
     bool isCovered(vector<vector<int>>& ranges, int left, int right) {
-        bool res_l = false;
-        bool res_r = false;
+        sort(ranges.begin(), ranges.end());
 
         for(auto it : ranges)
         {
-            if(left >= it[0])
-                res_l = true;
-
-            if(right <= it[1])
-                res_r = true;
+            if((it[0] <= left) && (left <= it[1]))
+            {
+                left = it[1]+1;
+            }
         }
 
-        return (res_l && res_r);
+        return (left > right);
     }
 };
 
