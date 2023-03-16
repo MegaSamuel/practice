@@ -4,7 +4,7 @@
 
 using namespace std;
 
-class Solution {
+class SolutionSilly {
 public:
     int singleNumber(vector<int>& nums) {
         sort(nums.begin(), nums.end());
@@ -28,11 +28,24 @@ public:
     }
 };
 
+class Solution {
+public:
+    int singleNumber(vector<int>& nums) {
+        int res = 0;
+        for (int x: nums) {
+            res ^= x;
+        }
+        return res;
+    }
+};
+
 int main()
 {
+    SolutionSilly ssol;
     Solution sol;
     vector<int> vct{2,2,3,3,8,8,4,5,5,6,6,4,100};
     //vector<int> vct{-1};
 
-    cout << "res " << sol.singleNumber(vct) << endl;
+    cout << "silly res " << ssol.singleNumber(vct) << endl;
+    cout << "smart res " << sol.singleNumber(vct) << endl;
 }
