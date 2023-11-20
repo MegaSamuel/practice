@@ -142,8 +142,8 @@ int main()
 }
 
 {
-    std::vector<uint32_t> vct_crc(10);
-    std::vector<std::string> vct_str(10);
+    std::vector<uint32_t> vct_crc(23);
+    std::vector<std::string> vct_str(23);
 
     vct_str[0] = "aaaaaaa";
     vct_str[1] = "dib8xz6";
@@ -155,12 +155,25 @@ int main()
     vct_str[7] = "hxv1vcv";
     vct_str[8] = "qrthguq";
     vct_str[9] = "uyf7g1f";
+    vct_str[10] = "xkc8pwf";
+    vct_str[11] = "1all3ls";
+    vct_str[12] = "23gkkun";
+    vct_str[13] = "3p9ia08";
+    vct_str[14] = "4iszvv0";
+    vct_str[15] = "45om8y2";
+    vct_str[16] = "68u4k1y";
+    vct_str[17] = "7jvoowi";
+    vct_str[18] = "7v93nci";
+    vct_str[19] = "8uuvwx6";
+    vct_str[20] = "8xgsxop";
+    vct_str[21] = "88487tr";
+    vct_str[22] = "9j7c32b";
 
     for (size_t i = 0; i < vct_crc.size(); ++i) {
         vct_crc[i] = crc32(vct_str[i]);
     }
 
-    std::cout << std::hex << "crc 0x" << vct_crc[0] << std::endl;
+    std::cout << std::hex << "crc 0x" << vct_crc[0] << " 0x" << vct_crc[22] << std::endl;
 
     // словарь
     std::vector<std::string> dict;
@@ -173,5 +186,11 @@ int main()
     dict.push_back("abcdefghijklmnopqrstuvwxyz0123456789.");
 
     //combination(dict, "", 0, crc32(vct_str[0]));
+}
+{
+    std::string str1 = "test   aaa";
+    std::string str2 = "test   aaa";
+
+    std::cout << std::hex << "crc 0x" << crc32(str1) << " 0x" << crc32(str2) << std::endl;
 }
 }
