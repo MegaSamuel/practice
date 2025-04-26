@@ -1,83 +1,80 @@
 #include <iostream>
 #include <vector>
-#include <stack>
+#include <algorithm>
 
-#if 0
-
-struct Node{  
-    int value;  
-    const Node* left = nullptr;  
-    const Node* right = nullptr;  
-  };
-  
-  void findMax(const Node* node, int& value)
-  {
-      // определяем максимальное значение
-      if( node->value > value )
-          value = node->value;
-  
-      // если есть левый потомок - рекурсивно запускаем поиск
-      if( nullptr != node->left )
-          findMax(node->left, value);
-  
-      // если есть правый потомок - рекурсивно запускаем поиск
-      if( nullptr != node->right )
-          findMax(node->right, value);
-  }
-  
-  int Solution(const Node* root) {
-      int max = 0;
-  
-      // если дерево есть, то запускаем поиск
-      if(nullptr != root)
-          findMax(root, max);
-  
-      return max;
-  }
-  
-  void test() {
-      Node node1({1, nullptr, nullptr});
-      Node node2({-5, nullptr, nullptr});
-      Node node3({3, &node1, &node2});
-      Node node4({2, &node3, nullptr});
-      assert(Solution(&node4) == 3);
-  }
-
-#endif
 
 struct Node
 {
     int value;
-    // const Node* parent;
+    int childValue;
     std::vector<Node*> children;
 };
 
-void printTree(const Node* tree)
+void calcAndSortTree(Node* tree)
 {
     if (tree == nullptr)
     {
         return;
     }
 
-    std::cout << tree->value << std::endl;
-
-    for (const Node* child : tree->children)
+    if (tree->children.empty())
     {
-        printTree(child);
+        tree->childValue = tree->value;
+    }
+    else
+    {
+        for (Node* child : tree->children)
+        {
+            tree->childValue += child->value;
+            calcAndSortTree(child);
+        }
+    }
+
+    std::sort(tree->children.begin(), tree->children.end(),
+        [](const Node* a, const Node* b)
+        {
+            return a->childValue > b->childValue;
+        });
+
+    std::cout << "sort " << tree->value << " " << tree->childValue << std::endl;
+}
+
+void addTreeToTable(Node* tree, void* tableItem)
+{
+    if (tree == nullptr)
+    {
+        return;
+    }
+
+    std::cout << "add " << tree->value << " " << tree->childValue << std::endl;
+
+    for (Node* child : tree->children)
+    {
+        addTreeToTable(child, nullptr);
     }
 }
 
 int main()
 {
-    Node node323({323, {}});
-    Node node322({322, {}});
-    Node node321({321, {}});
+    Node node3233({9, 0, {}});
+    Node node3232({8, 0, {}});
+    Node node3231({7, 0, {}});
 
-    Node node23({23, {}});
-    Node node22({22, {&node321, &node322, &node323}});
-    Node node21({21, {}});
+    Node node3223({6, 0, {}});
+    Node node3222({5, 0, {}});
+    Node node3221({4, 0, {}});
 
-    Node node1({1, {&node21, &node22, &node23}});
+    Node node3213({3, 0, {}});
+    Node node3212({2, 0, {}});
+    Node node3211({1, 0, {}});
 
-    printTree(&node1);
+    Node node23({23, 0, {&node3231, &node3232, &node3233}});
+    Node node22({22, 0, {&node3221, &node3222, &node3223}});
+    Node node21({21, 0, {&node3211, &node3212, &node3213}});
+
+    Node node1({111, 0, {&node21, &node22, &node23}});
+
+    calcAndSortTree(&node1);
+
+    addTreeToTable(&node1, nullptr);
 }
